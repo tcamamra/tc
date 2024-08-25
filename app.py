@@ -2,6 +2,8 @@ from flask import Flask, jsonify, render_template, request
 import pandas as pd
 import pickle
 import lightgbm as lgb
+import os
+
 
 app = Flask(__name__)
 
@@ -47,7 +49,9 @@ def api_predict():
     else:
         return jsonify({'error': "Méthode non supportée. Utilisez POST pour les prédictions."})
 
-if __name__ == '__main__':
-    app.run(port=8000)
 
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
 
